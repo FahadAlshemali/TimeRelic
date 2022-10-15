@@ -18,3 +18,28 @@ model User {
   createdAt    DateTime          @default(now()) @db.Timestamp(6)
  
 }
+
+model Choice{
+  id            String
+  choice_text   String
+}
+
+model User_choices{
+  id            String
+  userId        String
+  choiceId      String
+}
+
+model Situation{
+  id           String
+  story_text   String 
+}
+
+model Situation_Choice
+  id           String
+  situationId  String
+  choiceId     String
+  outcome      Boolean
+
+
+
