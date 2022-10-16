@@ -11,35 +11,41 @@ datasource db {
 }
 
 model User {
-  id           String            @id
-  email        String            @unique
-  userName     String            @unique
+  id           String         @id
+  email        String         @unique
+  userName     String         @unique
   password     String
-  createdAt    DateTime          @default(now()) @db.Timestamp(6)
- 
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  user_Choices User_choices[]
 }
 
-model Choice{
-  id            String
-  choice_text   String
+model User_choices {
+  id       String @id
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  choiceId String
+  choice   Choice @relation(fields: [choiceId], references: [id])
 }
 
-model User_choices{
-  id            String
-  userId        String
-  choiceId      String
+model Choice {
+  id              String            @id
+  choice_text     String
+  user_choices    User_choices[]
+  situationChoice SituationChoice[]
 }
 
-model Situation{
-  id           String
-  story_text   String 
+model SituationChoice {
+  id          String    @id
+  situationId String
+  choiceId    String
+  choice      Choice    @relation(fields: [choiceId], references: [id])
+  outcome     Boolean
+  situation   Situation @relation(fields: [situationId], references: [id])
 }
 
-model Situation_Choice
-  id           String
-  situationId  String
-  choiceId     String
-  outcome      Boolean
-
-
-
+model Situation {
+  id              String            @id
+  story_text      String
+  image           String
+  situationChoice SituationChoice[]
+}
