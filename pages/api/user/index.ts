@@ -6,19 +6,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { id, email, userName, password } = req.body;
+  const {  email, userName, password } = req.body;
   switch (req.method) {
     case "GET":
-      const user = await prisma.user.findFirst({ where: { email } });
+      const user = await prisma.user.findMany({ where: { email } });
       if (!user) {
         return res.status(400).json("user not found");
       }
+      res.status(200).json({ user });
       break;
     case "POST":
       try {
         const newUser = await prisma.user.create({
           data: {
-            id,
             email,
             userName,
             password,
@@ -30,6 +30,6 @@ export default async function handler(
       }
       break;
     default:
-      res.status(404).json("not found");
+      res.status(404).json("what are you doing here ?");
   }
 }
