@@ -10,10 +10,22 @@ import {
   Center,
 } from "@chakra-ui/react";
 import React from "react";
+import {useFormik} from "formik"
+import { EmailIcon } from "@chakra-ui/icons";
 
 type Props = {};
 
 export default function test({}: Props) {
+  const formik = useFormik({
+    initialValues:{
+      email:"",
+      userName:"",
+      password:""
+    },
+    onSubmit: async(values) =>{
+      
+    }
+  })
   return (
     <div style={{ position: "relative" }}>
       <div

@@ -44,7 +44,7 @@ model SituationChoice {
 }
 
 model Situation {
-  id              Int            @id
+  id              Int            @id @default(autoincrement())
   story_text      String
   image           String
   situationChoice SituationChoice[]
