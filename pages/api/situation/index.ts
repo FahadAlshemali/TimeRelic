@@ -13,25 +13,11 @@ export default async function handler(
         situationChoice:true
       }  });
       if (!situation) {
-        return res.status(400).json("user not found");
+        return res.status(400).json("not found");
       }
       res.status(200).json({ situation });
       break;
-    case "POST":
-      try {
-        const newUser = await prisma.user.create({
-          data: {
-            email,
-            userName,
-            password,
-          },
-        });
-        res.status(200).json({ newUser });
-      } catch (error) {
-        res.status(400).json({ message: console.log(error) });
-      }
-      break;
     default:
-      res.status(404).json("what are you doing here ?");
+      res.status(404).json("hmmm! ?");
   }
 }

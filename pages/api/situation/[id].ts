@@ -6,6 +6,8 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   const { id }: { id?: string } = req.query;
-  const situation = await prisma.situation.findUnique({ where: { id: +id! } });
+  const situation = await prisma.situation.findUnique({ where: { id: +id! },include:{
+    situationChoice:true
+  }  });
   res.status(200).json({ situation });
 }
