@@ -10,7 +10,7 @@ export default async function handler(
   switch (req.method) {
     case "GET":
       const situation = await prisma.situation.findMany({include:{
-        situationChoice:true
+        situationChoice:{include:{choice:true}}
       }  });
       if (!situation) {
         return res.status(400).json("not found");

@@ -1,6 +1,7 @@
 import React from "react";
 import {
   background,
+  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -15,8 +16,8 @@ type Props = {};
 
 const Hero = (props: Props) => {
   return (
-    <div style={{position:"relative"}}>
-      <div
+    <Box style={{position:"relative"}}>
+      <Box
         style={{
           backgroundImage: `url(https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/sadasdsad.jpeg)`,
           backgroundSize: "cover",
@@ -30,9 +31,9 @@ const Hero = (props: Props) => {
           zIndex:"-1"
         }}
         >
-        </div>
+        </Box>
         <Center>
-          <div
+          <Box
             style={{
               backgroundImage: `url(https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/sadasdsad.jpeg)`,
               backgroundSize: "cover",
@@ -40,9 +41,9 @@ const Hero = (props: Props) => {
               height: "100vh",
               backgroundPosition: "center",
             }}
-          ></div>
+          ></Box>
         </Center>
-    </div>
+    </Box>
   );
 };
 

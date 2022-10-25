@@ -10,25 +10,23 @@ import {
   Center,
 } from "@chakra-ui/react";
 import React from "react";
-import {useFormik} from "formik"
+import { useFormik } from "formik";
 import { EmailIcon } from "@chakra-ui/icons";
 
 type Props = {};
 
 export default function test({}: Props) {
   const formik = useFormik({
-    initialValues:{
-      email:"",
-      userName:"",
-      password:""
+    initialValues: {
+      email: "",
+      userName: "",
+      password: "",
     },
-    onSubmit: async(values) =>{
-      
-    }
-  })
+    onSubmit: async (values) => {},
+  });
   return (
-    <div style={{ position: "relative" }}>
-      <div
+    <Box style={{ position: "relative" }}>
+      <Box
         style={{
           backgroundImage: `url(https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/sadasdsad.jpeg)`,
           backgroundSize: "cover",
@@ -41,9 +39,9 @@ export default function test({}: Props) {
           left: "0px",
           zIndex: "-1",
         }}
-      ></div>
+      ></Box>
       <Center>
-        <div
+        <Box
           style={{
             backgroundImage: `url(https://nipsxawvnjrdqkigovgl.supabase.co/storage/v1/object/public/workout/sadasdsad.jpeg)`,
             backgroundSize: "cover",
@@ -53,15 +51,14 @@ export default function test({}: Props) {
           }}
         >
           <Box
-            backgroundColor={'white'}
+            backgroundColor={"white"}
             w={["full", "md"]}
-            p={[8, 10]}
+            p={[8, 5]}
             mt={[20, "20vh"]}
             mx="auto"
             border={["none", "1px"]}
             borderColor={["", "gray.300"]}
             borderRadius={12}
-            
           >
             <VStack spacing={4} align="flex-start" w="full">
               <VStack spacing={1} align={["flex-start", "center"]} w="full">
@@ -89,8 +86,8 @@ export default function test({}: Props) {
               </Button>
             </VStack>
           </Box>
-        </div>
+        </Box>
       </Center>
-    </div>
+    </Box>
   );
 }
