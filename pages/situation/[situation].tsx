@@ -19,7 +19,7 @@ export default function Index({ situation:situation }: Props) {
       <div className=" w-screen h-screen flex flex-col justify-center items-center absolute border-t-black left-0 top-0">
         <img
           className="md:w-1/3 w-3/4 border-8 border-black border-solid"
-          src="https://tgokvvdetwamaeawjpwo.supabase.co/storage/v1/object/public/time-relic/minPicture.png"
+          src={situation.image}
         />
         <div className=" md:w-2/5 w-4/5 py-5 px-4  bg-t min-h-40 mt-8  rounded-xl">
           <h1 className=" text-white  text-center  font-bold  text-2xl md:text-lg EnchantedLand ">
