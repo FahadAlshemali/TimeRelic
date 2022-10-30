@@ -21,7 +21,7 @@ export default async function handler(
           data: {
             email,
             userName,
-            password,
+            password
           },
         });
         res.status(200).json({ newUser });

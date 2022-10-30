@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@1,400;1,700&family=Roboto+Slab:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Noto+Serif:ital,wght@1,400;1,700&family=Roboto+Slab:wght@200&display=swap");
+
 html,
 body {
   padding: 0;
@@ -23,4 +26,76 @@ a {
     color: white;
     background: black;
   }
+  .godOfWar {
+    font-family: EnchantedLand;
+  }
+  .EnchantedLand {
+    font-family: "Marcellus SC", serif;
+  }
 }
+.responsive-image {
+  width: 100%;
+  background-size: 100% 100%;
+}
+
+.bg-t {
+  background-color: rgba(0, 0, 0, 0.585);
+}
+
+@font-face {
+  font-family: EnchantedLand;
+  src: url("/assets/fonts/EnchantedLand.otf") format("opentype");
+}
+
+.customB {
+  width: 150px;
+  height: 80px;
+  /* background-color: rgb(225, 224, 224); */
+  border: solid rgb(150, 149, 149) 6px;
+  /* outline: solid rgb(106, 105, 105) 5px */
+  border-image: linear-gradient(
+      to right,
+      rgba(192, 190, 190, 0.809),
+      rgba(106, 105, 105, 0.872)
+    )
+    0.5;
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+  background: rgb(243, 243, 249) !important;
+  background: linear-gradient(
+    169deg,
+    rgba(243, 243, 249, 1) 0%,
+    rgba(170, 170, 170, 1) 38%,
+    rgba(201, 201, 201, 1) 66%
+  ) !important;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+.customB:focus {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset !important;
+  border-image: linear-gradient(
+      to right,
+      rgba(125, 125, 125, 0.872),
+      rgba(162, 160, 160, 0.809)
+    )
+    1;;
+
+
+}
+.customC button{
+  width: 250px;
+  height: 80px;
+  
+  
+  
+}
+@media screen and (max-width:760px) {
+  .customC button{
+    width: 80px !important;
+    
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
