@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id           Int         @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   email        String         @unique
   userName     String         @unique
   password     String
@@ -20,32 +20,32 @@ model User {
 }
 
 model User_choices {
-  id       Int @id
+  id       Int    @id
   userId   Int
   user     User   @relation(fields: [userId], references: [id])
-  choiceId Int
+  choiceId String
   choice   Choice @relation(fields: [choiceId], references: [id])
 }
 
 model Choice {
-  id              Int            @id
-  choice_text     String
-  user_choices    User_choices[]
-  situationChoice SituationChoice[]
+  id           String            @id
+  choice_text  String
+  user_choices User_choices[]
+  situation    SituationChoice[]
 }
 
 model SituationChoice {
-  id          Int    @id
-  situationId Int
-  choiceId    Int
+  id          String    @id
+  situationId String
+  choiceId    String
   choice      Choice    @relation(fields: [choiceId], references: [id])
-  outcome     Boolean
+  // outcome     Boolean
   situation   Situation @relation(fields: [situationId], references: [id])
 }
 
 model Situation {
-  id              Int            @id @default(autoincrement())
-  story_text      String
-  image           String
-  situationChoice SituationChoice[]
+  id         String            @id
+  story_text String
+  image      String
+  choice     SituationChoice[]
 }

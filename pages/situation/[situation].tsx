@@ -1,10 +1,12 @@
-import { Situation } from "@prisma/client";
+import { Choice, Situation, SituationChoice } from "@prisma/client";
 import { GetStaticPaths } from "next";
+import Link from "next/link";
 import React from "react";
 import { prisma } from "../../lib/prisma";
-type Props = { situation: Situation };
+type Props = { situation: Situation &{choice:SituationChoice[] & {choice:Choice}} }
 
-export default function Index({ situation }: Props) {
+export default function Index({ situation:situation }: Props) {
+  console.log(situation.choice[0].choice.choice_text)
   return (
     <div className="relative w-100 h-screen overflow-hidden">
       <div
@@ -34,7 +36,9 @@ export default function Index({ situation }: Props) {
               backgroundSize: "100% 100%",
             }}
           >
-            take the key
+            <Link href={`/situation/4`}>
+          {situation.choice[0].choice.choice_text}
+            </Link>
           </button>
           <button
             type="button"
@@ -45,7 +49,7 @@ export default function Index({ situation }: Props) {
               backgroundSize: "100% 100%",
             }}
           >
-            yes
+            {/* {SituationChoice?.choiceId.toString()} */}
           </button>
           <button
             type="button"
@@ -56,7 +60,7 @@ export default function Index({ situation }: Props) {
               backgroundSize: "100% 100%",
             }}
           >
-            yes
+            {/* {SituationChoice?.choiceId.valueOf()} */}
           </button>
         </div>
       </div>
@@ -66,19 +70,25 @@ export default function Index({ situation }: Props) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const situation = await prisma.situation.findMany();
-  const paths = situation.map((brand) => ({
-    params: { situation: brand.id.toString() },
+  const paths = situation.map((situationChoice) => ({
+    params: { situation: situationChoice.id.toString() },
   }));
   return { paths, fallback: false };
 };
 export const getStaticProps = async ({ params }: any) => {
   const id = params.situation;
   console.log(id);
+  // const situation = await prisma.situationChoice.findFirst({
+  //   where: { id:  id! }  ,
+  //   include: { situationChoice: { include: { choice: true } } },
+  // });
   const situation = await prisma.situation.findFirst({
-    where: { situationChoice: { some: { choiceId: +id! } } },
-    include: { situationChoice: { include: { choice: true } } },
+    where: { id: id! },
+    include: {choice:{include:{choice:true}}}
   });
+  console.log(situation);
   return {
-    props: { situation },
+    props: { situation: situation}
+    
   };
 };

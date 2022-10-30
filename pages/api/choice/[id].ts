@@ -8,7 +8,7 @@ export default async function handler(
   try {
     const { id }: { id?: string } = req.query;
     const situation = await prisma.situation.findMany({
-      where: { situationChoice: { some: { choiceId: +id! } } },
+      where: { situationChoice: { some: { choiceId: id! } } },
       include: { situationChoice: { include: { choice: true } } },
     });
     res.status(200).json({ situation });
