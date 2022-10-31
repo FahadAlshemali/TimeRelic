@@ -3,10 +3,20 @@ import { GetStaticPaths } from "next";
 import Link from "next/link";
 import React from "react";
 import { prisma } from "../../lib/prisma";
-type Props = { situation: Situation &{choice:SituationChoice[] & {choice:Choice}} }
 
-export default function Index({ situation:situation }: Props) {
-  console.log(situation.choice[0].choice.choice_text)
+// type Props = {
+//   situation: Situation & { choice: SituationChoice[] & {choice:Choice}} ;
+// };
+// type  ChoiceTest = {
+//    situation:Situation,
+//    choice:SituationChoice[] & {choice:Choice}
+//   }
+export default function Index({
+  situation,
+}: {
+  situation: Situation & { choice: (SituationChoice & { choice: Choice })[] };
+}) {
+  console.log(situation);
   return (
     <div className="relative w-100 h-screen overflow-hidden">
       <div
@@ -27,7 +37,10 @@ export default function Index({ situation:situation }: Props) {
           </h1>
         </div>
         <div className="flex justify-center  align-center  flex-wrap mt-2 customC">
+        {situation.choice.map(situations =>(
+
           <button
+            key={situations.choice.id}
             type="button"
             className="  text-xl font-bold mx-1 mt-3"
             style={{
@@ -36,32 +49,11 @@ export default function Index({ situation:situation }: Props) {
               backgroundSize: "100% 100%",
             }}
           >
-            <Link href={`/situation/4`}>
-          {situation.choice[0].choice.choice_text}
+            <Link href={`/situation/${situations.choiceId}`}>
+              {situations.choice.choice_text}
             </Link>
           </button>
-          <button
-            type="button"
-            className="  text-xl font-bold mx-1 mt-3"
-            style={{
-              backgroundImage:
-                "url(https://tgokvvdetwamaeawjpwo.supabase.co/storage/v1/object/public/time-relic/button.png)",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            {/* {SituationChoice?.choiceId.toString()} */}
-          </button>
-          <button
-            type="button"
-            className="  text-xl font-bold mx-1 mt-3"
-            style={{
-              backgroundImage:
-                "url(https://tgokvvdetwamaeawjpwo.supabase.co/storage/v1/object/public/time-relic/button.png)",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            {/* {SituationChoice?.choiceId.valueOf()} */}
-          </button>
+        ))}
         </div>
       </div>
     </div>
@@ -84,11 +76,11 @@ export const getStaticProps = async ({ params }: any) => {
   // });
   const situation = await prisma.situation.findFirst({
     where: { id: id! },
-    include: {choice:{include:{choice:true}}}
+    include: { choice: { include: { choice: true } } },
   });
   console.log(situation);
+
   return {
-    props: { situation: situation}
-    
+    props: { situation: situation },
   };
 };
