@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const {  email, userName, password } = req.body;
+  const { id, email, userName, password } = req.body;
   switch (req.method) {
     case "GET":
       const user = await prisma.user.findMany({ where: { email } });
@@ -19,6 +19,7 @@ export default async function handler(
       try {
         const newUser = await prisma.user.create({
           data: {
+            id,
             email,
             userName,
             password
@@ -26,6 +27,7 @@ export default async function handler(
         });
         res.status(200).json({ newUser });
       } catch (error) {
+        console.log(error)
         res.status(400).json({ message: console.log(error) });
       }
       break;

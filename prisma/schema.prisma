@@ -11,17 +11,17 @@ datasource db {
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
+  id           String            @id 
   email        String         @unique
   userName     String         @unique
   password     String
-  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  createdAt    DateTime?      @default(now()) @db.Timestamp(6)
   user_Choices User_choices[]
 }
 
 model User_choices {
   id       Int    @id
-  userId   Int
+  userId   String
   user     User   @relation(fields: [userId], references: [id])
   choiceId String
   choice   Choice @relation(fields: [choiceId], references: [id])

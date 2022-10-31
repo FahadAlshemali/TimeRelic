@@ -4,13 +4,6 @@ import Link from "next/link";
 import React from "react";
 import { prisma } from "../../lib/prisma";
 
-// type Props = {
-//   situation: Situation & { choice: SituationChoice[] & {choice:Choice}} ;
-// };
-// type  ChoiceTest = {
-//    situation:Situation,
-//    choice:SituationChoice[] & {choice:Choice}
-//   }
 export default function Index({
   situation,
 }: {
@@ -37,23 +30,22 @@ export default function Index({
           </h1>
         </div>
         <div className="flex justify-center  align-center  flex-wrap mt-2 customC">
-        {situation.choice.map(situations =>(
-
-          <button
-            key={situations.choice.id}
-            type="button"
-            className="  text-xl font-bold mx-1 mt-3"
-            style={{
-              backgroundImage:
-                "url(https://tgokvvdetwamaeawjpwo.supabase.co/storage/v1/object/public/time-relic/button.png)",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            <Link href={`/situation/${situations.choiceId}`}>
-              {situations.choice.choice_text}
-            </Link>
-          </button>
-        ))}
+          {situation.choice.map((situations) => (
+            <button
+              key={situations.choice.id}
+              type="button"
+              className="  text-xl font-bold mx-1 mt-3"
+              style={{
+                backgroundImage:
+                  "url(https://tgokvvdetwamaeawjpwo.supabase.co/storage/v1/object/public/time-relic/button.png)",
+                backgroundSize: "100% 100%",
+              }}
+            >
+              <Link href={`/situation/${situations.choiceId}`}>
+                {situations.choice.choice_text}
+              </Link>
+            </button>
+          ))}
         </div>
       </div>
     </div>

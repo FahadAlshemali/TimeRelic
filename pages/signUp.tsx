@@ -12,17 +12,28 @@ import {
 import React from "react";
 import { useFormik } from "formik";
 import { EmailIcon } from "@chakra-ui/icons";
+import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
+import { createUSer } from "../utils/API";
+import  { useRouter } from "next/router";
 
 type Props = {};
 
 export default function test({}: Props) {
+  const { supabaseClient } = useSessionContext();
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
       email: "",
       userName: "",
       password: "",
     },
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      console.log(values);
+      await createUSer(values, supabaseClient);
+      formik.resetForm();
+      
+      
+    },
   });
   return (
     <Box style={{ position: "relative" }}>
@@ -66,22 +77,54 @@ export default function test({}: Props) {
               </VStack>
               <FormControl>
                 <FormLabel>Email</FormLabel>
-                <Input rounded="none" variant="filled" />
+                <Input
+                  rounded="none"
+                  variant="filled"
+                  type="email"
+                  name="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
               </FormControl>
               <FormControl>
                 <FormLabel>UserName</FormLabel>
-                <Input rounded="none" variant="filled" />
+                <Input
+                  rounded="none"
+                  variant="filled"
+                  type="userName"
+                  name="userName"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.userName}
+                />
               </FormControl>
               <FormControl>
                 <FormLabel>Password</FormLabel>
-                <Input rounded="none" variant="filled" type="password" />
+                <Input
+                  rounded="none"
+                  variant="filled"
+                  type="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
               </FormControl>
               <HStack w="full" justify="center">
                 <Button variant="link" colorScheme="green">
                   already have account ?
                 </Button>
               </HStack>
-              <Button rounded="none" colorScheme="blackAlpha" w="full">
+              <Button
+                onClick={() => {
+                  formik.handleSubmit()
+                }}
+                type="button"
+                rounded="none"
+                colorScheme="blackAlpha"
+                w="full"
+              >
                 Register
               </Button>
             </VStack>
