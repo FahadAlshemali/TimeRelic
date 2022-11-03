@@ -83,16 +83,23 @@ a {
 
 }
 .customC button{
-  width: 250px;
-  height: 80px;
+  width: 280px;
   
-  
+  padding: 10px;
+  min-height: 80px;
+
   
 }
 @media screen and (max-width:760px) {
   .customC button{
-    width: 80px !important;
+    width: 180px !important;
+    padding: 10px;
+    font-size: 16px !important;
     
+  }
+  .customT {
+    font-size: 14px !important
+
   }
 }
 
