@@ -17,7 +17,6 @@ import { createUSer } from "../utils/API";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
-
 type Props = {};
 
 export default function test({}: Props) {
@@ -26,10 +25,10 @@ export default function test({}: Props) {
   const user = useUser();
   const formik = useFormik({
     initialValues: {
-      email:"",
+      email: "",
       password: "",
     },
-    
+
     onSubmit: async (values) => {
       const res = await supabaseClient.auth.signInWithPassword({ ...values });
       router.push("/situation/1");

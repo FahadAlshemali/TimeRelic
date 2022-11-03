@@ -14,14 +14,13 @@ import { useFormik } from "formik";
 import { EmailIcon } from "@chakra-ui/icons";
 import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
 import { createUSer } from "../utils/API";
-import  { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 type Props = {};
 
-export default function test({}: Props) {
-  
+export default function signUp({}: Props) {
   const { supabaseClient } = useSessionContext();
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,8 +31,7 @@ export default function test({}: Props) {
       console.log(values);
       await createUSer(values, supabaseClient);
       formik.resetForm();
-      router.push('/situation/1')
-      
+      router.push("/situation/1");
     },
   });
   return (
@@ -119,7 +117,7 @@ export default function test({}: Props) {
               </HStack>
               <Button
                 onClick={() => {
-                  formik.handleSubmit()
+                  formik.handleSubmit();
                 }}
                 type="button"
                 rounded="none"
