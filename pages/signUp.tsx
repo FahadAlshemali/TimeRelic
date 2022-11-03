@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-export default function signUp({}: Props) {
+export default function SignUp({}: Props) {
   const { supabaseClient } = useSessionContext();
   const router = useRouter();
   const formik = useFormik({

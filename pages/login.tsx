@@ -19,7 +19,7 @@ import * as Yup from "yup";
 
 type Props = {};
 
-export default function test({}: Props) {
+export default function Login({}: Props) {
   const { supabaseClient } = useSessionContext();
   const router = useRouter();
   const user = useUser();
