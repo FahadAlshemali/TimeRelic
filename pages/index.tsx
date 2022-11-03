@@ -6,12 +6,11 @@ import styles from "../styles/Home.module.css";
 import { Box, Center, Img } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
-  return (
-   
-      <Hero />
-
-   
-  );
+  return(
+    
+    <Hero />
+    
+  )
 };
 
 export default Home;

@@ -14,26 +14,25 @@ import { useFormik } from "formik";
 import { EmailIcon } from "@chakra-ui/icons";
 import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
 import { createUSer } from "../utils/API";
-import  { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+
 
 type Props = {};
 
 export default function test({}: Props) {
-  
   const { supabaseClient } = useSessionContext();
-  const router = useRouter()
+  const router = useRouter();
+  const user = useUser();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      userName: "",
+      email:"",
       password: "",
     },
+    
     onSubmit: async (values) => {
-      console.log(values);
-      await createUSer(values, supabaseClient);
-      formik.resetForm();
-      router.push('/situation/1')
-      
+      const res = await supabaseClient.auth.signInWithPassword({ ...values });
+      router.push("/situation/1");
     },
   });
   return (
@@ -74,10 +73,10 @@ export default function test({}: Props) {
           >
             <VStack spacing={4} align="flex-start" w="full">
               <VStack spacing={1} align={["flex-start", "center"]} w="full">
-                <Heading>Register</Heading>
+                <Heading>Login</Heading>
               </VStack>
               <FormControl>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>email</FormLabel>
                 <Input
                   rounded="none"
                   variant="filled"
@@ -88,18 +87,7 @@ export default function test({}: Props) {
                   value={formik.values.email}
                 />
               </FormControl>
-              <FormControl>
-                <FormLabel>UserName</FormLabel>
-                <Input
-                  rounded="none"
-                  variant="filled"
-                  type="userName"
-                  name="userName"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.userName}
-                />
-              </FormControl>
+
               <FormControl>
                 <FormLabel>Password</FormLabel>
                 <Input
@@ -112,21 +100,17 @@ export default function test({}: Props) {
                   value={formik.values.password}
                 />
               </FormControl>
-              <HStack w="full" justify="center">
-                <Button variant="link" colorScheme="green">
-                  already have account ?
-                </Button>
-              </HStack>
+
               <Button
                 onClick={() => {
-                  formik.handleSubmit()
+                  formik.handleSubmit();
                 }}
                 type="button"
                 rounded="none"
                 colorScheme="blackAlpha"
                 w="full"
               >
-                Register
+                Login
               </Button>
             </VStack>
           </Box>

@@ -1,7 +1,9 @@
 import { Choice, Situation, SituationChoice } from "@prisma/client";
+import { useUser } from "@supabase/auth-helpers-react";
 import { GetStaticPaths } from "next";
 import Link from "next/link";
-import React from "react";
+import Router, { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { prisma } from "../../lib/prisma";
 
 export default function Index({
@@ -10,6 +12,13 @@ export default function Index({
   situation: Situation & { choice: (SituationChoice & { choice: Choice })[] };
 }) {
   console.log(situation);
+  const router = useRouter();
+  const user = useUser();
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user]);
   return (
     <div className="relative w-100  min-h-screen overflow-hidden">
       <div
@@ -42,7 +51,7 @@ export default function Index({
                 }}
               >
                 <Link href={`/situation/${situations.choiceId}`}>
-                 {situations.choice.choice_text}
+                  {situations.choice.choice_text}
                 </Link>
               </button>
             ))}
